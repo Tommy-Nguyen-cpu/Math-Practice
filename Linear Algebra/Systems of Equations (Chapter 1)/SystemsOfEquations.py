@@ -84,20 +84,22 @@ def solve_linear_equations(matrix):
         for j in range(i + 1, len(matrix)):
             perform_row_operations(matrix, i, j)
     for i in range(len(matrix) - 1, -1, -1):
-        for j in range(len(matrix) - 2, -1, -1):
+        for j in range(0, i):
             perform_row_operations(matrix, i, j)
-    
+
     print(matrix)
 
 def perform_row_operations(matrix, i, j):
     factor = -1 * matrix[j][i] / matrix[i][i]
+    if factor == 0.0: return
     print(f"step 1, calculate factor: -1 * {matrix[j][i]} / {matrix[i][i]}")
     matrix[j] = matrix[j] + matrix[i] * factor
     print(f"step 2, calculate new row: {matrix[j]} + {matrix[i]} * {factor}")
     print(matrix)
     print()
+    
 solve_linear_equations(
-    np.array([[1, 1, 2, 9], 
-     [2, 4, -3, 1], 
+    np.array([[1, 1, 2, 9],
+     [2, 4, -3, 1],
       [3, 6, -5, 0]], dtype=np.float16)
 )
