@@ -90,6 +90,31 @@ def solve_linear_equations(matrix):
     print(matrix)
 
 def perform_row_operations(matrix, i, j):
+    # Check for infinite or zero solutions.
+    unknowns = matrix[:, :-1]
+
+    non_zero_unknowns = np.count_nonzero(unknowns, axis = 1) # Count all non-zeroes unknowns in each row.
+    print(non_zero_unknowns)
+
+    no_nonzero = np.argwhere(non_zero_unknowns == 0) # Find all instance in which the row only has no non_zero
+    if len(no_nonzero) > 0:
+        print("INFINITE or ZERO SOLUTIONS.")
+        return
+
+    if matrix[i][i] == 0.0:
+        columns = matrix[:, i]
+        non_zero_columns = columns[columns != 0]
+        if len(non_zero_columns) == 0: return
+        first_non_zero = (columns != 0).argmax()
+    if len(columns) != 0:
+        temp = np.array(matrix[i])
+        print(f"Swap rows {temp} and {matrix[first_non_zero]}")
+        matrix[i] = matrix[first_non_zero]
+        matrix[first_non_zero] = temp
+
+        perform_row_operations(matrix, i, j)
+        return
+
     factor = -1 * matrix[j][i] / matrix[i][i]
     if factor == 0.0: return
     print(f"step 1, calculate factor: -1 * {matrix[j][i]} / {matrix[i][i]}")
@@ -97,9 +122,8 @@ def perform_row_operations(matrix, i, j):
     print(f"step 2, calculate new row: {matrix[j]} + {matrix[i]} * {factor}")
     print(matrix)
     print()
-    
 solve_linear_equations(
-    np.array([[1, 1, 2, 9],
-     [2, 4, -3, 1],
-      [3, 6, -5, 0]], dtype=np.float16)
+    np.array([[1, -1, 2, 5],
+     [2, -2, 4, 10],
+     [3, -3, 6, 15]], dtype=np.float16)
 )
