@@ -94,7 +94,6 @@ def perform_row_operations(matrix, i, j):
     unknowns = matrix[:, :-1]
 
     non_zero_unknowns = np.count_nonzero(unknowns, axis = 1) # Count all non-zeroes unknowns in each row.
-    print(non_zero_unknowns)
 
     no_nonzero = np.argwhere(non_zero_unknowns == 0) # Find all instance in which the row only has no non_zero
     if len(no_nonzero) > 0:
