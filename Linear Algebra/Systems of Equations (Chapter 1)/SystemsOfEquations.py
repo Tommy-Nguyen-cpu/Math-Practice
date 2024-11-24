@@ -105,14 +105,14 @@ def perform_row_operations(matrix, i, j):
         if len(non_zero_columns) == 0:
             raise Exception(f"Invalid matrix! All unknowns at column {i} is 0.")
         first_non_zero = (columns != 0).argmax()
-    if len(columns) != 0:
-        temp = np.array(matrix[i])
-        print(f"Swap rows {temp} and {matrix[first_non_zero]}")
-        matrix[i] = matrix[first_non_zero]
-        matrix[first_non_zero] = temp
+        if len(columns) != 0:
+            temp = np.array(matrix[i])
+            print(f"Swap rows {temp} and {matrix[first_non_zero]}")
+            matrix[i] = matrix[first_non_zero]
+            matrix[first_non_zero] = temp
 
-        perform_row_operations(matrix, i, j)
-        return
+            perform_row_operations(matrix, i, j)
+            return
 
     factor = -1 * matrix[j][i] / matrix[i][i]
     if factor == 0.0: return
