@@ -98,7 +98,8 @@ def perform_row_operations(matrix, i, j):
     no_nonzero = np.argwhere(non_zero_unknowns == 0) # Find all instance in which the row only has no non_zero
     if len(no_nonzero) > 0:
         raise Exception("INFINITE or ZERO SOLUTIONS.")
-
+    
+    # Perform Row swap if applicable.
     if matrix[i][i] == 0.0:
         columns = matrix[:, i]
         non_zero_columns = columns[columns != 0]
@@ -113,7 +114,8 @@ def perform_row_operations(matrix, i, j):
 
             perform_row_operations(matrix, i, j)
             return
-
+    
+    # Perform row based operations (Multiplication and addition/subtraction).
     factor = -1 * matrix[j][i] / matrix[i][i]
     if factor == 0.0: return
     print(f"step 1, calculate factor: -1 * {matrix[j][i]} / {matrix[i][i]}")
