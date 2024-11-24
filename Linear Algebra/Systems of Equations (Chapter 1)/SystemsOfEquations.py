@@ -97,13 +97,13 @@ def perform_row_operations(matrix, i, j):
 
     no_nonzero = np.argwhere(non_zero_unknowns == 0) # Find all instance in which the row only has no non_zero
     if len(no_nonzero) > 0:
-        print("INFINITE or ZERO SOLUTIONS.")
-        return
+        raise Exception("INFINITE or ZERO SOLUTIONS.")
 
     if matrix[i][i] == 0.0:
         columns = matrix[:, i]
         non_zero_columns = columns[columns != 0]
-        if len(non_zero_columns) == 0: return
+        if len(non_zero_columns) == 0:
+            raise Exception(f"Invalid matrix! All unknowns at column {i} is 0.")
         first_non_zero = (columns != 0).argmax()
     if len(columns) != 0:
         temp = np.array(matrix[i])
