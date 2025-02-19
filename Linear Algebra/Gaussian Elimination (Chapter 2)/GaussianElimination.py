@@ -49,7 +49,7 @@ def gaussian_elimination(matrix):
     curr_col_idx = num_cols - 1
     for curr_row_idx in range(len(matrix)-1, -1, -1):
       curr_row = matrix[curr_row_idx][:-1] # Grab the current row, excluding the last column.
-      print(f"row: {curr_row}, unknown: {unknowns}")
+      print(f"row: {matrix[curr_row_idx]}, unknown: {unknowns}")
       curr_row *= unknowns # Plug in our solutions into the current row.
       curr_cell = matrix[curr_row_idx][curr_col_idx] # Grab the current unknown in the matrix.
       solution = matrix[curr_row_idx][-1] / curr_cell # Solve for the unknown
