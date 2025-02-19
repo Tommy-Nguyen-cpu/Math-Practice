@@ -49,15 +49,16 @@ def gaussian_elimination(matrix):
     curr_col_idx = num_cols - 1
     for curr_row_idx in range(len(matrix)-1, -1, -1):
       curr_row = matrix[curr_row_idx][:-1] # Grab the current row, excluding the last column.
-      print(f"row: {matrix[curr_row_idx]}, unknown: {unknowns}")
+      print(f"current row: {matrix[curr_row_idx]}, unknowns: {unknowns}")
       curr_row *= unknowns # Plug in our solutions into the current row.
       added_constants = np.sum(curr_row[curr_col_idx + 1:]) # Calculate the sum of all solved unknowns.
-      print(f"sum: {added_constants}")
+      print(f"sum of all solved unknowns up to this point: {added_constants}")
       curr_cell = matrix[curr_row_idx][curr_col_idx] # Grab the current unknown in the matrix.
       solution = (matrix[curr_row_idx][-1] + -1 * added_constants) / curr_cell # Solve for the unknown
-      print(f"Solving for unknown: ({matrix[curr_row_idx][-1]} + {-1 * added_constants}) / {curr_cell} = {solution}")
+      print(f"Solving for current unknown: ({matrix[curr_row_idx][-1]} + {-1 * added_constants}) / {curr_cell} = {solution}")
       unknowns[curr_col_idx] = solution # Place our solution into our numpy array.
       curr_col_idx -= 1
+      print()
     print(f"Our solution set is: {unknowns}")
 
 gaussian_elimination(np.array([[1, 4, 2, 9],
