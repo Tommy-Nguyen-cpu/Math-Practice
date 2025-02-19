@@ -39,21 +39,23 @@ def gaussian_elimination(matrix):
     num_cols = matrix.shape[1] - 1 # Subtracting one to avoid the constants.
     if num_cols > num_rows:
         raise Exception("There are more unknowns than there are equations, meaning this is likely an infinite solution scenario!")
-    
+
     # Forward phase
     for curr in range(len(matrix)):
         for next in range(curr + 1, len(matrix)):
             perform_row_operation(matrix, curr, next)
-    
+
     unknowns = np.ones(num_cols, dtype=np.float32) # Will hold our solutions.
     curr_col_idx = num_cols - 1
     for curr_row_idx in range(len(matrix)-1, -1, -1):
       curr_row = matrix[curr_row_idx][:-1] # Grab the current row, excluding the last column.
       print(f"row: {matrix[curr_row_idx]}, unknown: {unknowns}")
       curr_row *= unknowns # Plug in our solutions into the current row.
+      added_constants = np.sum(curr_row[curr_col_idx + 1:]) # Calculate the sum of all solved unknowns.
+      print(f"sum: {added_constants}")
       curr_cell = matrix[curr_row_idx][curr_col_idx] # Grab the current unknown in the matrix.
-      solution = matrix[curr_row_idx][-1] / curr_cell # Solve for the unknown
-      print(f"Solving for unknown: {matrix[curr_row_idx][-1]} / {curr_cell}")
+      solution = (matrix[curr_row_idx][-1] + -1 * added_constants) / curr_cell # Solve for the unknown
+      print(f"Solving for unknown: ({matrix[curr_row_idx][-1]} + {-1 * added_constants}) / {curr_cell} = {solution}")
       unknowns[curr_col_idx] = solution # Place our solution into our numpy array.
       curr_col_idx -= 1
     print(f"Our solution set is: {unknowns}")
