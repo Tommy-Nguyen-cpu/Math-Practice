@@ -45,7 +45,7 @@ def gaussian_elimination(matrix):
         for next in range(curr + 1, len(matrix)):
             perform_row_operation(matrix, curr, next)
 
-    unknowns = np.ones(num_cols, dtype=np.float32) # Will hold our solutions.
+    unknowns = np.ones(num_cols, dtype=np.float64) # Will hold our solutions.
     curr_col_idx = num_cols - 1
     for curr_row_idx in range(len(matrix)-1, -1, -1):
       curr_row = matrix[curr_row_idx][:-1] # Grab the current row, excluding the last column.
@@ -63,4 +63,4 @@ def gaussian_elimination(matrix):
 
 gaussian_elimination(np.array([[1, 4, 2, 9],
      [10, 4, -3, 1],
-      [3, 6, -5, 0]], dtype=np.float16))
+      [3, 6, -5, 0]], dtype=np.float64))
