@@ -49,6 +49,24 @@ def matrix_multiplication(matrix1, matrix2):
 
     return result
 
+def matrix_trace(matrix):
+    if len(matrix) != len(matrix[0]):
+        raise ValueError("Matrix must be square for trace calculation.")
+    
+    trace = 0
+    for i in range(len(matrix)):
+        trace += matrix[i][i]
+    return trace
+
+def matrix_transpose(matrix):
+    result = []
+    for i in range(len(matrix)):
+        row = []
+        for j in range(len(matrix[i])):
+            row.append(matrix[j][i]) # swap the indices to transpose.
+        result.append(row)
+    return result
+
 mat1 = [[1, 2, 3], 
         [3, 4, 1]]
 mat2 = [[5, 6], 
