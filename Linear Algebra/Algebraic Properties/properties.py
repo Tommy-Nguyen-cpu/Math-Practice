@@ -25,3 +25,21 @@ def find_inverse(matrixA):
     return inverse_matrix
 
 print(find_inverse(np.array([[4, 7], [2, 6]])))
+
+def verify_inverse(matrixA, inverse_matrix):
+    identity_matrix = np.zeros((len(matrixA), len(inverse_matrix[0])))
+    for i in range(len(matrixA)): # Column of OG matrix.
+        sum_val = 0
+        for j in range(len(inverse_matrix[0])): # Row of inverse matrix.
+            sum_val += matrixA[i][j] * inverse_matrix[j][i]
+        identity_matrix[i][i] = sum_val
+
+    print(f"Manual: Product of original matrix and its inverse:\n {identity_matrix}")
+
+def verify_inverse_numpy(matrixA, inverse_matrix):
+    identity_matrix = np.dot(matrixA, inverse_matrix)
+    print(f"NumPy: Product of original matrix and its inverse:\n {identity_matrix}")
+
+inverse = find_inverse(np.array([[4, 7], [2, 6]]))
+verify_inverse_numpy(np.array([[4, 7], [2, 6]]), inverse)
+verify_inverse(np.array([[4, 7], [2, 6]]), inverse)
