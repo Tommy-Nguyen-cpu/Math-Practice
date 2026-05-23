@@ -40,6 +40,18 @@ def verify_inverse_numpy(matrixA, inverse_matrix):
     identity_matrix = np.dot(matrixA, inverse_matrix)
     print(f"NumPy: Product of original matrix and its inverse:\n {identity_matrix}")
 
+def verify_product_of_transpose(matrixA, matrixB):
+    product = np.dot(matrixA, matrixB)
+    transposed_product = np.transpose(product)
+
+    transposed_A = np.transpose(matrixA)
+    transposed_B = np.transpose(matrixB)
+    product_of_transposes = np.dot(transposed_B, transposed_A)
+
+    print(f"Transposed Product:\n {transposed_product}")
+    print(f"Product of transposes:\n {product_of_transposes}")
+
 inverse = find_inverse(np.array([[4, 7], [2, 6]]))
 verify_inverse_numpy(np.array([[4, 7], [2, 6]]), inverse)
 verify_inverse(np.array([[4, 7], [2, 6]]), inverse)
+verify_product_of_transpose(np.array([[4, 7], [2, 6]]), np.array([[1, 2], [3, 4]]))
